@@ -5,20 +5,33 @@ from django.db import models
 from model_utils.models import TimeStampedModel
 
 
-class Experiment(TimeStampedModel):
+class BaseModel(TimeStampedModel, TitleSlugDescriptionModel):
+    """
+    Abstract model to store information about an experiment that may or
+    may not be given.
+    `title` `description`, and `slug` fields inherited from django-extensions
+    TitleSlugDescriptionModel.
+    """
+
+    def __str__(self):
+        return "{title}".format(title=self.title)
+
+
+class Experiment(BaseModel):
     pass
-    
 
-class Case(TimeStampedModel):
+
+class Case(BaseModel):
     pass
-    
 
-class Field(TimeStampedModel):
+
+class FieldGroup(BaseModel):
     pass
-    
 
-class Catalog(TimeStampedModel):
+
+class Value(TimeStampedModel):
     pass
-    
 
 
+class Catalog(BaseModel):
+    pass
