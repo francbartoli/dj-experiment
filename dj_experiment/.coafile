@@ -1,0 +1,23 @@
+[Formatting]
+bears = LineCountBear,LineLengthBear,SpaceConsistencyBear
+files = **/*.py
+max_line_length = 96
+max_lines_per_file = 512
+use_spaces = True
+
+[Python]
+bears = PEP8Bear,PyDocStyleBear,PyFlakesBear,PyLintBear
+files = **/*.py
+ignore = test.py
+pydocstyle_ignore = D100, D101, D102, D103, D104, D105, D203, D213
+pylint_disable = C0111, R0903
+
+[PythonWithoutTest]
+bears = CPDBear,VultureBear
+ignore = test/*
+files = **/*.py
+language = python
+
+[Security]
+bears = BanditBear
+files = **/*.py
