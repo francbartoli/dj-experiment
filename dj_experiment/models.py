@@ -2,7 +2,7 @@
 
 from django.db import models
 
-from model_extensions.models import TimeStampedModel, TitleSlugDescriptionModel
+from django_extensions.models import TimeStampedModel, TitleSlugDescriptionModel
 
 
 class BaseModel(TimeStampedModel, TitleSlugDescriptionModel):
