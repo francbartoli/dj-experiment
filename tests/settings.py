@@ -19,6 +19,7 @@ DATABASES = {
 ROOT_URLCONF = "tests.urls"
 
 INSTALLED_APPS = [
+    'django.contrib.admin',
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sites",
@@ -32,3 +33,8 @@ if django.VERSION >= (1, 10):
     MIDDLEWARE = ()
 else:
     MIDDLEWARE_CLASSES = ()
+
+# dj_experiment specific settings
+
+DJ_EXPERIMENT_DATA_DIR = './'
+DJ_EXPERIMENT_SEPARATOR = '.'
