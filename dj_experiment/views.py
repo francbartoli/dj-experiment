@@ -10,7 +10,8 @@ from django.views.generic import (
 from .models import (
 	Experiment,
 	Case,
-	Field,
+	FieldGroup,
+    Value,
 	Catalog,
 )
 
@@ -65,29 +66,54 @@ class CaseListView(ListView):
     model = Case
 
 
-class FieldCreateView(CreateView):
+class FieldGroupCreateView(CreateView):
 
-    model = Field
-
-
-class FieldDeleteView(DeleteView):
-
-    model = Field
+    model = FieldGroup
 
 
-class FieldDetailView(DetailView):
+class FieldGroupDeleteView(DeleteView):
 
-    model = Field
-
-
-class FieldUpdateView(UpdateView):
-
-    model = Field
+    model = FieldGroup
 
 
-class FieldListView(ListView):
+class FieldGroupDetailView(DetailView):
 
-    model = Field
+    model = FieldGroup
+
+
+class FieldGroupUpdateView(UpdateView):
+
+    model = FieldGroup
+
+
+class FieldGroupListView(ListView):
+
+    model = FieldGroup
+
+
+class ValueCreateView(CreateView):
+
+    model = Value
+
+
+class ValueDeleteView(DeleteView):
+
+    model = Value
+
+
+class ValueDetailView(DetailView):
+
+    model = Value
+
+
+class ValueUpdateView(UpdateView):
+
+    model = Value
+
+
+class ValueListView(ListView):
+
+    model = Value
 
 
 class CatalogCreateView(CreateView):
@@ -113,4 +139,3 @@ class CatalogUpdateView(UpdateView):
 class CatalogListView(ListView):
 
     model = Catalog
-
