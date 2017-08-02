@@ -1,5 +1,5 @@
 # -*- coding: utf-8
-from __future__ import unicode_literals, absolute_import
+from __future__ import absolute_import, unicode_literals
 
 import django
 
@@ -38,3 +38,5 @@ else:
 
 DJ_EXPERIMENT_DATA_DIR = './'
 DJ_EXPERIMENT_SEPARATOR = '.'
+DJ_EXPERIMENT_OUTPUT_PREFIX = ""
+DJ_EXPERIMENT_OUTPUT_SUFFIX = ".nc"
