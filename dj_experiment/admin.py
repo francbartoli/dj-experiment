@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Experiment, Case, FieldGroup, Catalog, Value
+
+from .models import Case, Catalog, Experiment, FieldGroup, Value
 
 admin.site.register(Experiment)
 admin.site.register(Case)
