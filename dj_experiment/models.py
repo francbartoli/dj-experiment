@@ -19,11 +19,12 @@ class BaseModel(TimeStampedModel, TitleSlugDescriptionModel):
     description - string
     slug - string
     """
+    name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         """Do a text representation of all models."""
 
-        return "{title}".format(title=self.title)
+        return "{name}".format(name=self.name)
 
 
 class Value(TimeStampedModel):
@@ -52,7 +53,6 @@ class FieldGroup(BaseModel):
 class Experiment(BaseModel):
     """Represent an experiment."""
 
-    name = models.CharField(max_length=100)
     cases = models.ManyToManyField(
         Case, related_name='experiments', verbose_name=_('Esperiment cases'))
     fieldgroups = models.ForeignKey(FieldGroup, related_name='experiments')
