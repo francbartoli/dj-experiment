@@ -73,4 +73,7 @@ class Experiment(BaseModel):
 class Catalog(BaseModel):
     """Represent a catalog of all experiments."""
 
-    xperiments = models.ForeignKey(Experiment, related_name='catalogs')
+    xperiments = models.ManyToManyField(
+        Experiment,
+        related_name='catalogs',
+        verbose_name=_('Catalog experiments'))
