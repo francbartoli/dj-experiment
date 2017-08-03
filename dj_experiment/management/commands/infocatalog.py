@@ -18,7 +18,7 @@ class Command(BaseCommand):
             raise CommandError("infocatalog takes no arguments")
         column_names = ['Catalog Name']
         # [self.stdout.write(cat, ending='') for cat in Catalog.objects.all()]
-        catalog = [cat.title for cat in Catalog.objects.all()]
+        catalog = [cat.name for cat in Catalog.objects.all()]
 
         self.stdout.write(format_pretty_table(
             [catalog, ], column_names))
