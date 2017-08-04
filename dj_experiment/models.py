@@ -19,26 +19,31 @@ class BaseModel(TimeStampedModel, TitleSlugDescriptionModel):
     description - string
     slug - string
     """
+
     name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         """Do a text representation of all models."""
-
         return "{name}".format(name=self.name)
 
 
 class Value(TimeStampedModel):
     """Represent values of all cases and fieldgroups."""
 
-    val = models.CharField(blank=False, max_length=100)
+    val = models.CharField(blank=False, max_length=100, unique=True)
+
+    def __str__(self):
+        """Do a text representation of the model."""
+        return "{val}".format(val=self.val)
 
 
 class Case(BaseModel):
-    """Represent a single case"""
+    """Represent a single case of an experiment."""
 
     shortname = models.CharField(blank=False, max_length=50)
     longname = models.CharField(blank=False, max_length=100)
-    casevals = models.ForeignKey(Value, related_name='cases')
+    casevals = models.ManyToManyField(
+        Value, related_name='cases', verbose_name=_('Case values'))
 
 
 class FieldGroup(BaseModel):
@@ -46,7 +51,8 @@ class FieldGroup(BaseModel):
 
     shortname = models.CharField(blank=False, max_length=50)
     longname = models.CharField(blank=False, max_length=100)
-    fieldnames = models.ForeignKey(Value, related_name='fieldgroups')
+    fieldnames = models.ManyToManyField(
+        Value, related_name='fieldgroups', verbose_name=_('FieldGroup values'))
     is_initialposition = models.BooleanField(default=False)
 
 
