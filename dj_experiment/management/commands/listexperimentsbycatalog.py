@@ -1,3 +1,5 @@
+import logging
+
 from dj_experiment.models import Catalog
 from django.core.management.base import BaseCommand, CommandError
 from humanfriendly.tables import format_smart_table
@@ -11,7 +13,7 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         """Add arguments for handling the command."""
         # Named (optional) arguments start with --
-        parser.add_argument('-C', '--catalog',  # argument flag
+        parser.add_argument('-c', '--catalog',  # argument flag
                             dest='catalog',  # argument name
                             default=None,
                             help='Query catalog by its name',
@@ -40,3 +42,5 @@ class Command(BaseCommand):
 
         self.stdout.write(format_smart_table(
             explist, column_names))
+
+        logging.info('Command executed successfully!')
