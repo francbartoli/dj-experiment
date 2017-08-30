@@ -1,6 +1,6 @@
 django-model-utils>=2.0
 # Additional requirements go here
-django>=1.8.7,<=1.9
+django==1.11.4
 django-extensions>=1.8
 django-appconf>=1.0.2
-humanfriendly
+humanfriendly==4.4.1
