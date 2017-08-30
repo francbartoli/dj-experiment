@@ -33,8 +33,8 @@ class Command(BaseCommand):
                             help='Create the configuration of an experiment in \
                             a specific base path',
                             )
-        parser.add_argument('-r', '--return',  # argument flag
-                            dest='return',  # argument name
+        parser.add_argument('-x', '--export',  # argument flag
+                            dest='export',  # argument name
                             default=None,
                             help='Return the configuration of an experiment in \
                             a specific base path',
@@ -49,8 +49,8 @@ class Command(BaseCommand):
         else:
             experiment_name = options['experiment']
             experiment_basepath = options.get('basepath')
-            if options.get('return'):
-                experiment_return = options.get('return')
+            if options.get('export'):
+                experiment_return = options.get('export')
             else:
                 experiment_return = False
 
@@ -172,7 +172,7 @@ class Command(BaseCommand):
             return validatedataval
 
         _BASE_DIR = experiment_basepath
-        experiment = Experiment(
+        xperiment = Experiment(
             experiment_name,
             cases=_load_cases(self, experiment_name),
             fieldgroups=_load_fieldgroups(self, experiment_name),
@@ -187,10 +187,13 @@ class Command(BaseCommand):
         )
 
         if experiment_return:
-            return experiment
-            self.stdout.write(self.style.NOTICE(
-                'Successfully returned configuration \
-                for "%s"' % experiment_name))
+            self.stdout.ending = ''
+            return xperiment.to_dict()
+            # self.stdout.write(self.style.NOTICE(
+            #     'Successfully returned configuration \
+            #     for "%s"' % experiment_name))
+            logging.info('Successfully returned configuration \
+                for "%s"' % experiment_name)
         self.stdout.write(self.style.NOTICE(
             'Successfully created configuration for "%s"' % experiment_name))
 
