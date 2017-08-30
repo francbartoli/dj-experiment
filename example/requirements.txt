@@ -1,6 +1,6 @@
 # Your app requirements.
 -r ../requirements_test.txt
-django>=1.8.7,<1.9
+django==1.11.4
 
 # Your app in editable mode.
 -e ../
