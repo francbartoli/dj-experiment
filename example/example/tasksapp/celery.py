@@ -10,14 +10,15 @@ from django.conf import settings
 if not settings.configured:
     # set the default Django settings module for the 'celery' program.
     os.environ.setdefault('DJANGO_SETTINGS_MODULE',
-                          'dj_experiment.conf.settings')  # pragma: no cover
+                          'example.settings')  # pragma: no cover
 
 
-app = Celery('dj_experiment.tasks', backend='rpc://')
+app = Celery('example.tasksapp', backend='rpc://',
+             include=['dj_experiment.tasks.tasks'])
 
 
 class CeleryConfig(AppConfig):
-    name = 'dj_experiment.tasks'
+    name = 'example.tasksapp'
     verbose_name = 'Celery Config'
 
     def ready(self):

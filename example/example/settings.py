@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'dj_experiment',
+    'appconf',
 
     # if your app has other dependencies that need to be added to the site
     # they should be added here
@@ -125,3 +126,5 @@ DJ_EXPERIMENT_DATA_DIR = 'RCM data'
 DJ_EXPERIMENT_SEPARATOR = '_'
 DJ_EXPERIMENT_OUTPUT_PREFIX = ""
 DJ_EXPERIMENT_OUTPUT_SUFFIX = ".nc"
+DJ_EXPERIMENT_CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672//'
+DJ_EXPERIMENT_CELERY_RESULT_BACKEND = 'rpc://'
