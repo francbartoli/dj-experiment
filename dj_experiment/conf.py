@@ -7,6 +7,8 @@ class MyAppConf(AppConf):
     SEPARATOR = "."
     OUTPUT_PREFIX = ""
     OUTPUT_SUFFIX = ".nc"
+    CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672//'
+    CELERY_RESULT_BACKEND = 'rpc://'
 
     class Meta:
         prefix = 'dj_experiment'
