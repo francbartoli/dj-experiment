@@ -2,7 +2,7 @@ from appconf import AppConf
 from django.conf import settings
 
 
-class MyAppConf(AppConf):
+class DjExperimentAppConf(AppConf):
     DATA_DIR = "./"
     SEPARATOR = "."
     OUTPUT_PREFIX = ""
