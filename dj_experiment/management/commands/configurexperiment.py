@@ -188,6 +188,8 @@ class Command(BaseCommand):
 
         if experiment_return:
             self.stdout.ending = ''
+            self.stdout.write(xperiment.to_dict())
+            logging.debug(xperiment.to_dict())
             return xperiment.to_dict()
             # self.stdout.write(self.style.NOTICE(
             #     'Successfully returned configuration \
