@@ -4,10 +4,9 @@ import os
 import sys
 from StringIO import StringIO
 
+from dj_experiment.conf import settings
 from dj_experiment.management.commands.configurexperiment import \
     Command as ConfigureExperiment
-from dj_experiment.settings import (DJ_EXPERIMENT_BASE_DATA_DIR,
-                                    DJ_EXPERIMENT_DATA_DIR)
 from experiment import Case, Experiment, Field
 
 
@@ -16,8 +15,8 @@ def get_experiment(namedexp, rootdirexp):
     # namedexp = 'RCM data'
     # set default root data dir if passed directory doesn't exist
     if not os.path.exists(rootdirexp):
-        rootdirexp = os.path.join(DJ_EXPERIMENT_BASE_DATA_DIR,
-                                  DJ_EXPERIMENT_DATA_DIR)
+        rootdirexp = os.path.join(settings.DJ_EXPERIMENT_BASE_DATA_DIR,
+                                  settings.DJ_EXPERIMENT_DATA_DIR)
 
     old_stdout = sys.stdout
     # This variable will store everything that is sent to the
