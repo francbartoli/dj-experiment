@@ -2,8 +2,7 @@ import os
 import time
 
 from dj_experiment.tasks.tasks import longtime_add, netcdf_save
-from example.settings import (DJ_EXPERIMENT_BASE_DATA_DIR,
-                              DJ_EXPERIMENT_DATA_DIR)
+from example.settings import DJ_EXPERIMENT_BASE_DATA_DIR
 
 if __name__ == '__main__':
     result = longtime_add.delay(1, 2)
@@ -16,8 +15,7 @@ if __name__ == '__main__':
     print 'Task finished? ', result.ready()
     print 'Task result: ', result.result
 
-    rcmdatadir = os.path.join(DJ_EXPERIMENT_BASE_DATA_DIR,
-                              DJ_EXPERIMENT_DATA_DIR)
+    rcmdatadir = DJ_EXPERIMENT_BASE_DATA_DIR
     result1 = netcdf_save.delay(14, rcmdatadir)
     print 'Task netcdf finished? ', result1.ready()
     print 'Task result1: ', result1.result
