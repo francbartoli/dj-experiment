@@ -123,6 +123,7 @@ STATIC_URL = '/static/'
 # dj_experiment specific settings
 
 DJ_EXPERIMENT_DATA_DIR = 'RCM data'
+DJ_EXPERIMENT_BASE_DATA_DIR = os.path.join(BASE_DIR, 'data')
 DJ_EXPERIMENT_SEPARATOR = '_'
 DJ_EXPERIMENT_OUTPUT_PREFIX = ""
 DJ_EXPERIMENT_OUTPUT_SUFFIX = ".nc"
