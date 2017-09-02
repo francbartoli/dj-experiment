@@ -21,8 +21,10 @@ def longtime_add(x, y):
 def netcdf_save(exp_id, dir):
     print 'netcdf save task begins'
     # do something
-    xpname = ModExperiment.objects.get(pk=exp_id)
-    xpinst = get_experiment(xpname, '')
+    xperiment = ModExperiment.objects.get(pk=exp_id)
+    xpname = xperiment.name
+    print 'xpname=%s' % xpname
+    xpinst = get_experiment(xpname, dir)
     rdb.set_trace()
     print xpinst
     print 'netcdf save task finished'

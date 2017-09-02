@@ -12,11 +12,11 @@ from experiment import Case, Experiment, Field
 
 def get_experiment(namedexp, rootdirexp):
 
-    # namedexp = 'RCM data'
     # set default root data dir if passed directory doesn't exist
     if not os.path.exists(rootdirexp):
-        rootdirexp = os.path.join(settings.DJ_EXPERIMENT_BASE_DATA_DIR,
-                                  settings.DJ_EXPERIMENT_DATA_DIR)
+        logging.debug("Input root directory %s doesn't exist, default \
+                value %s" % (rootdirexp, settings.DJ_EXPERIMENT_BASE_DATA_DIR))
+        rootdirexp = settings.DJ_EXPERIMENT_BASE_DATA_DIR
 
     old_stdout = sys.stdout
     # This variable will store everything that is sent to the
