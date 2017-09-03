@@ -57,7 +57,14 @@ setup(
     ],
     include_package_data=True,
     install_requires=[
+        'git+git://github.com/francbartoli/experiment@devel'
         'django-model-utils>=2.0',
+        'django>=1.8.7,<1.9',
+        'django-extensions>=1.8',
+        'django-appconf>=1.0.2',
+        'humanfriendly',
+        'celery>=4.1.0',
+        'scandir>=1.5'
     ],
     license="MIT",
     zip_safe=False,
