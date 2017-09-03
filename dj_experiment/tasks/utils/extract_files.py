@@ -4,6 +4,7 @@ import os
 import sys
 from StringIO import StringIO
 
+import scandir
 from dj_experiment.conf import settings
 from dj_experiment.management.commands.configurexperiment import \
     Command as ConfigureExperiment
@@ -64,3 +65,37 @@ def get_experiment(namedexp, rootdirexp):
     xperiment = Experiment(**xperkwargs)
     logging.debug(xperiment.to_dict())
     return xperiment
+
+
+def get_files(inst, datadir):
+
+    extension = inst.output_suffix
+    return _build_fullfilepathname(extension, datadir)
+
+
+def _build_fullpathname(ext, dirname, names):
+
+    ext = ext.lower()
+
+    for name in names:
+        if name.lower().endswith(ext):
+            return(os.path.join(dirname, name))
+
+
+def _build_fullfilepathname(ext, root):
+
+    ext = ext.lower()
+    tpl = tuple()
+
+    for dirname, dirs, files in scandir.walk(root):
+        for file_ in files:
+            if file_.lower().endswith(ext):
+                logging.debug("file_=%s" % file_)
+                logging.debug("dirname=%s" % dirname)
+                logging.debug("fullname=%s" % os.path.join(dirname, file_))
+                logging.debug("relpath=%s" % os.path.relpath(dirname, root))
+                tpl += ((file_,
+                         dirname,
+                         os.path.join(dirname, file_),
+                         os.path.relpath(dirname, root)), )
+    return tpl
