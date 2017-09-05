@@ -6,7 +6,8 @@ import time
 from celery import shared_task
 from celery.contrib import rdb
 from dj_experiment.models import Experiment as ModExperiment
-from dj_experiment.tasks.utils.extract_files import get_experiment, get_files
+from dj_experiment.tasks.utils.extract_files import (get_experiment, get_files,
+                                                     get_keywords)
 
 
 @shared_task
@@ -29,7 +30,14 @@ def netcdf_save(exp_id, dir):
     # rdb.set_trace()
     print xpinst
     xpfiles = get_files(xpinst, xpinst.data_dir)
-    for xpfile in xpfiles:
-        logging.debug("files are the following ===> \n %s" % xpfile[0])
+    if len(xpfiles) == 0:
+        logging.info(
+            "No results, the number of files retrieved is %s" % len(xpfiles))
+    else:
+        for xpfile in xpfiles:
+            logging.debug("files are the following ===> \n %s" % xpfile[0])
+            logging.debug("xpfile type is %s" % type(xpfile))
+            keywords = get_keywords(xpinst, xpfile)
+            logging.debug("Keywords are the following ===> %s" % keywords)
     print 'netcdf save task finished'
     # return query count from db

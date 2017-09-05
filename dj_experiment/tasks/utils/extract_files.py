@@ -73,13 +73,22 @@ def get_files(inst, datadir):
     return _build_fullfilepathname(extension, datadir)
 
 
-def _build_fullpathname(ext, dirname, names):
+def get_keywords(inst, filetuple):
 
-    ext = ext.lower()
-
-    for name in names:
-        if name.lower().endswith(ext):
-            return(os.path.join(dirname, name))
+    # catch year as extra_keywords and clean it
+    searchfile = filetuple[0]
+    logging.debug("Search keywords for file %s" % searchfile)
+    fields = inst.get_fieldgroup_vals(inst.fieldgroups[0])[0]
+    cleanfile, extra_keywords = _build_extrakeywords(searchfile,
+                                                     inst.all_case_vals(),
+                                                     fields,
+                                                     inst.output_suffix)
+    logging.debug("Cleaned file ===> %s" % cleanfile)
+    searchcleanedfile = os.path.join(settings.DJ_EXPERIMENT_DATA_DIR,
+                                     str(filetuple[3]),
+                                     str(cleanfile))
+    logging.debug("Extra keywords from file %s" % extra_keywords)
+    return extra_keywords
 
 
 def _build_fullfilepathname(ext, root):
@@ -99,3 +108,35 @@ def _build_fullfilepathname(ext, root):
                          os.path.join(dirname, file_),
                          os.path.relpath(dirname, root)), )
     return tpl
+
+
+def _build_extrakeywords(fn, casevals, fieldvals, filesuffix):
+
+    foundwords = list()
+    extrawords = list()
+
+    # find words not present along cases
+    words = os.path.splitext(str(fn))[0].split(
+        settings.DJ_EXPERIMENT_SEPARATOR
+    )
+    logging.debug("Input words are ===> %s" % words)
+    for word in words:
+        if any(
+            word in s for s in [
+                val for vals in casevals for val in vals
+            ]
+        ):
+            foundwords.append(word)
+            logging.debug("Foundwords are ===> %s" % foundwords)
+    extrawords = [item for item in words if item not in foundwords]
+    logging.debug("Extrawords are ===> %s" % extrawords)
+    cleanextrawords = [
+        cleanextra for cleanextra in extrawords if cleanextra not in fieldvals
+    ]
+    logging.debug("Cleanextrawords are ===> %s" % cleanextrawords)
+    cleanwords = [clean for clean in words if clean not in cleanextrawords]
+    cleanwords.append(filesuffix)
+    logging.debug("Cleanwords are ===> %s" % cleanwords)
+    fn = settings.DJ_EXPERIMENT_SEPARATOR.join(cleanwords)
+    logging.debug("Clean content of fn is ===> %s" % fn)
+    return fn, extrawords
