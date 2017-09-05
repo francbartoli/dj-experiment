@@ -87,8 +87,37 @@ def get_keywords(inst, filetuple):
     searchcleanedfile = os.path.join(settings.DJ_EXPERIMENT_DATA_DIR,
                                      str(filetuple[3]),
                                      str(cleanfile))
-    logging.debug("Extra keywords from file %s" % extra_keywords)
-    return extra_keywords
+    logging.debug("Searching for matching cases \
+                  with this file ===> %s" % searchcleanedfile)
+    filetuple += (searchcleanedfile, )
+    fieldcaselist = inst.get_cases_fromfile(searchcleanedfile)
+    try:
+        matchdict = [
+            matchcases for matchcases in fieldcaselist if matchcases
+        ][0][0]
+        logging.debug(
+            "Key/value dictionary of matched cases is ===> %s" % matchdict
+        )
+        case_keywords = matchdict.values()
+        logging.debug("Case keywords from file %s" % case_keywords)
+        logging.debug("Extra keywords from file %s" % extra_keywords)
+        keywords = case_keywords + extra_keywords
+        if keywords:
+            keywords = list(set(keywords))
+            logging.info(
+                "Final return \nKEYWORDS===>%s\nfrom\nFILE===>%s " % (
+                    keywords, filetuple[0])
+            )
+            return filetuple, keywords
+    except IndexError as e:
+        logging.error(
+            "Passed file %s doesn't match any case" % searchcleanedfile
+        )
+        logging.debug("Exception is %s" % e)
+        logging.error(
+            "Not able to retrieve any keyword for file %s" % filetuple[0]
+        )
+        return filetuple, {}
 
 
 def _build_fullfilepathname(ext, root):

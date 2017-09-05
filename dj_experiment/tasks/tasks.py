@@ -35,9 +35,15 @@ def netcdf_save(exp_id, dir):
             "No results, the number of files retrieved is %s" % len(xpfiles))
     else:
         for xpfile in xpfiles:
-            logging.debug("files are the following ===> \n %s" % xpfile[0])
+            logging.debug("file is the following ===> \n %s" % xpfile[0])
             logging.debug("xpfile type is %s" % type(xpfile))
-            keywords = get_keywords(xpinst, xpfile)
-            logging.debug("Keywords are the following ===> %s" % keywords)
+            logging.info("############################################# \
+PROCESSING NEW FILE \
+##############################################")
+            logging.info("Processing file =====> %s" % xpfile[0])
+            xpoutfile, keywords = get_keywords(xpinst, xpfile)
+            logging.info(
+                "Retrieve keywords are the following ===> %s" % keywords
+            )
     print 'netcdf save task finished'
     # return query count from db
