@@ -93,12 +93,14 @@ def get_keywords(inst, filetuple):
     fieldcaselist = inst.get_cases_fromfile(searchcleanedfile)
     try:
         matchdict = [
-            matchcases for matchcases in fieldcaselist if matchcases
-        ][0][0]
+            ({inst.fieldgroups[0]:field},
+             matchcases[0]
+             ) for field, matchcases in fieldcaselist if matchcases
+        ]
         logging.debug(
             "Key/value dictionary of matched cases is ===> %s" % matchdict
         )
-        case_keywords = matchdict.values()
+        case_keywords = matchdict[0][1].values()
         logging.debug("Case keywords from file %s" % case_keywords)
         logging.debug("Extra keywords from file %s" % extra_keywords)
         keywords = case_keywords + extra_keywords
@@ -108,7 +110,7 @@ def get_keywords(inst, filetuple):
                 "Final return \nKEYWORDS===>%s\nfrom\nFILE===>%s " % (
                     keywords, filetuple[0])
             )
-            return filetuple, keywords
+            return filetuple, keywords, matchdict[0]
     except IndexError as e:
         logging.error(
             "Passed file %s doesn't match any case" % searchcleanedfile
@@ -117,7 +119,7 @@ def get_keywords(inst, filetuple):
         logging.error(
             "Not able to retrieve any keyword for file %s" % filetuple[0]
         )
-        return filetuple, {}
+        return filetuple, {}, ()
 
 
 def _build_fullfilepathname(ext, root):

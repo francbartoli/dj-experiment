@@ -41,7 +41,7 @@ def netcdf_save(exp_id, dir):
 PROCESSING NEW FILE \
 ##############################################")
             logging.info("Processing file =====> %s" % xpfile[0])
-            xpoutfile, keywords = get_keywords(xpinst, xpfile)
+            xpoutfile, keywords, fieldcases = get_keywords(xpinst, xpfile)
             logging.info(
                 "Retrieve keywords are the following ===> %s" % keywords
             )
