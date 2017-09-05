@@ -139,4 +139,5 @@ def _build_extrakeywords(fn, casevals, fieldvals, filesuffix):
     logging.debug("Cleanwords are ===> %s" % cleanwords)
     fn = settings.DJ_EXPERIMENT_SEPARATOR.join(cleanwords)
     logging.debug("Clean content of fn is ===> %s" % fn)
+    extrawords = map(unicode, extrawords)
     return fn, extrawords
