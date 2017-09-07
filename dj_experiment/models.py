@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import os
+
 from dj_experiment.conf import settings
 from django.db import models
 from django.utils.translation import gettext as _
@@ -102,10 +104,14 @@ class FieldKeyValue(models.Model):
 class Dataset(BaseModel):
     """Represent an output dataset for an experiment."""
 
-    dsfilename = models.CharField(max_length=256, db_index=True, unique=True)
-    dsfile = models.FilePathField(path=settings.DJ_EXPERIMENT_DATA_DIR,
-                                  recursive=True,
-                                  max_length=1024)
+    dsfilename = models.CharField(
+        max_length=256, db_index=True, unique=True)
+    dsfile = models.FilePathField(path=os.path.join(
+        settings.DJ_EXPERIMENT_BASE_DATA_DIR,
+        settings.DJ_EXPERIMENT_DATA_DIR
+    ),
+        recursive=True,
+        max_length=1024)
     casekeyvalues = models.ManyToManyField(
         CaseKeyValue,
         through='CaseBelongingness',
