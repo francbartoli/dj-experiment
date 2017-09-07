@@ -119,7 +119,7 @@ def get_keywords(inst, filetuple):
         logging.error(
             "Not able to retrieve any keyword for file %s" % filetuple[0]
         )
-        return filetuple, {}, ()
+        return filetuple, {}, ({}, {})
 
 
 def _build_fullfilepathname(ext, root):
