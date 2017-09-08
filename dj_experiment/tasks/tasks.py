@@ -106,6 +106,8 @@ PROCESSING NEW FILE \
                         keyvalue=CaseKeyValue.objects.get(pk=obj)
                     )
                     ocb.save()
+                # add keywords to dataset object
+                dsobj.tags.add(*keywords)
 
             else:
                 logging.info("Skipping file to database insertion")
