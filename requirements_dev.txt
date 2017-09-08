@@ -5,3 +5,7 @@ git+git://github.com/francbartoli/experiment@devel
 django-extensions>=1.8
 django-appconf>=1.0.2
 ipdb
+celery>=4.1.0
+django-celery-results>=1.0.1
+scandir>=1.5
+django-taggit>=0.22.1

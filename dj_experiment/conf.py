@@ -1,12 +1,18 @@
+import os
+
 from appconf import AppConf
 from django.conf import settings
 
 
-class MyAppConf(AppConf):
+class DjExperimentAppConf(AppConf):
     DATA_DIR = "./"
+    BASE_DATA_DIR = os.path.join(settings.BASE_DIR, 'data')
     SEPARATOR = "."
     OUTPUT_PREFIX = ""
     OUTPUT_SUFFIX = ".nc"
+    CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672//'
+    CELERY_RESULT_BACKEND = 'rpc://'
+    TAGGIT_CASE_INSENSITIVE = True
 
     class Meta:
         prefix = 'dj_experiment'

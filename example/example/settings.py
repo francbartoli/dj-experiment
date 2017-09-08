@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'dj_experiment',
+    'appconf',
+    'taggit',
 
     # if your app has other dependencies that need to be added to the site
     # they should be added here
@@ -122,6 +124,12 @@ STATIC_URL = '/static/'
 # dj_experiment specific settings
 
 DJ_EXPERIMENT_DATA_DIR = 'RCM data'
+DJ_EXPERIMENT_BASE_DATA_DIR = os.path.join(BASE_DIR, 'data')
 DJ_EXPERIMENT_SEPARATOR = '_'
 DJ_EXPERIMENT_OUTPUT_PREFIX = ""
 DJ_EXPERIMENT_OUTPUT_SUFFIX = ".nc"
+DJ_EXPERIMENT_CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672//'
+DJ_EXPERIMENT_CELERY_RESULT_BACKEND = 'rpc://'
+DJ_EXPERIMENT_TAGGIT_CASE_INSENSITIVE = True
+
+TAGGIT_CASE_INSENSITIVE = DJ_EXPERIMENT_TAGGIT_CASE_INSENSITIVE
