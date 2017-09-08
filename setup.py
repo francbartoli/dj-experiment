@@ -64,7 +64,8 @@ setup(
         'django-appconf>=1.0.2',
         'humanfriendly',
         'celery>=4.1.0',
-        'scandir>=1.5'
+        'scandir>=1.5',
+        'django-taggit>=0.22.1'
     ],
     license="MIT",
     zip_safe=False,
