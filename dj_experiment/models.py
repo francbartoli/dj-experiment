@@ -7,6 +7,7 @@ from django.db import models
 from django.utils.translation import gettext as _
 from django_extensions.db.models import (TimeStampedModel,
                                          TitleSlugDescriptionModel)
+from taggit.managers import TaggableManager
 
 
 class BaseModel(TimeStampedModel, TitleSlugDescriptionModel):
@@ -112,6 +113,7 @@ class Dataset(BaseModel):
     ),
         recursive=True,
         max_length=1024)
+    tags = TaggableManager()
     casekeyvalues = models.ManyToManyField(
         CaseKeyValue,
         through='CaseBelongingness',
