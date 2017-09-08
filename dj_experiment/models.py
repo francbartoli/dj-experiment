@@ -121,6 +121,9 @@ class Dataset(BaseModel):
         through='FieldBelongingness',
         through_fields=('dataset', 'keyvalue'))
 
+    def __str__(self):
+        return self.dsfilename
+
 
 class CaseBelongingness(models.Model):
     """Represent bridge to a key,value case for a dataset of an experiment."""
@@ -130,7 +133,7 @@ class CaseBelongingness(models.Model):
 
 
 class FieldBelongingness(models.Model):
-    """Represent brodge to a key,value field for a dataset of an experiment."""
+    """Represent bridge to a key,value field for a dataset of an experiment."""
 
     dataset = models.ForeignKey(Dataset)
     keyvalue = models.ForeignKey(FieldKeyValue)
