@@ -12,6 +12,7 @@ class DjExperimentAppConf(AppConf):
     OUTPUT_SUFFIX = ".nc"
     CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672//'
     CELERY_RESULT_BACKEND = 'rpc://'
+    TAGGIT_CASE_INSENSITIVE = True
 
     class Meta:
         prefix = 'dj_experiment'
