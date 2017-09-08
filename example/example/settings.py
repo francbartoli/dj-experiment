@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 
     'dj_experiment',
     'appconf',
+    'taggit',
 
     # if your app has other dependencies that need to be added to the site
     # they should be added here
@@ -129,3 +130,6 @@ DJ_EXPERIMENT_OUTPUT_PREFIX = ""
 DJ_EXPERIMENT_OUTPUT_SUFFIX = ".nc"
 DJ_EXPERIMENT_CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672//'
 DJ_EXPERIMENT_CELERY_RESULT_BACKEND = 'rpc://'
+DJ_EXPERIMENT_TAGGIT_CASE_INSENSITIVE = True
+
+TAGGIT_CASE_INSENSITIVE = DJ_EXPERIMENT_TAGGIT_CASE_INSENSITIVE
