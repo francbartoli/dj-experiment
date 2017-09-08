@@ -21,4 +21,4 @@ if __name__ == '__main__':
     print 'Task result1: ', result1.result
     time.sleep(10)
     print 'Task netcdf finished? ', result1.ready()
-    print 'Task result1: ', result1.result
+    print 'Task produced a total number %s of files' % result1.result

@@ -114,3 +114,4 @@ PROCESSING NEW FILE \
 
     print 'netcdf save task finished'
     # return query count from db
+    return Dataset.objects.count()
